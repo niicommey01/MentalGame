@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.Sockets;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
@@ -129,21 +130,20 @@ namespace MentalGame
 
         static void ValidateAnswer(int actualAnswer, string userAnswer, ScoreManager scoreManager)
         {
-            if (userAnswer.Equals(string.Empty))
+            if (string.IsNullOrEmpty(userAnswer))
             {
                 scoreManager.SubtractPoints(1);
-                Console.WriteLine("Oh, no. Minus a point");
+                Console.WriteLine("On, no. Minus a point");
             }
-            
-            else if (actualAnswer.Equals(userAnswer))
+            else if (int.TryParse(userAnswer, out int userAnswerInt) && userAnswerInt == actualAnswer)
             {
                 scoreManager.AddPoints(3);
-                Console.WriteLine("Plus 3 points. Good job!");
+                Console.WriteLine("Plus 3 points");
             }
             else
             {
-                scoreManager.SubtractPoints(0);
-                Console.WriteLine("Oh, no. Minus a point for wrong answer");
+                scoreManager.SubtractPoints(1);
+                Console.WriteLine("Wrong answer. Minus a point");
             }
         }
 
