@@ -12,7 +12,7 @@ namespace MentalGame
         static void Main(string[] args)
         {
 
-            Stopwatch stopwatch = new Stopwatch();
+            Stopwatch stopwatch = new();
 
             TimeSpan timeLimit = TimeSpan.FromSeconds(5);
 
@@ -29,7 +29,7 @@ namespace MentalGame
                     stopwatch.Reset();
                     stopwatch.Start();
                     
-                    string userAnswer = ReadAnswer(stopwatch, timeLimit);
+                    string? userAnswer = ReadAnswer(stopwatch, timeLimit);
                     
                     ValidateAnswer(actualAnswer, userAnswer, scoreManager);
 
@@ -47,7 +47,7 @@ namespace MentalGame
             while (true)
             {
                 Console.Write("\nDo you want to proceed to the next round?[y/n]: ");
-                string proceed = Console.ReadLine()?.Trim().ToLower();
+                string? proceed = Console.ReadLine()?.Trim().ToLower();
                 
                 switch (proceed)
                 {
